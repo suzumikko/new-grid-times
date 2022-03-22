@@ -6,7 +6,7 @@ import { QUERIES } from '../../constants';
 
 import MaxWidthWrapper from '../MaxWidthWrapper';
 import Logo from '../Logo';
-import Button from '../Button';
+import Button from "../Button";
 
 const Header = () => {
   return (
@@ -29,7 +29,19 @@ const Header = () => {
         </Row>
       </SuperHeader>
       <MainHeader>
+        <DesktopActionGroup>
+          <button>
+            <Search size={24} />
+          </button>
+          <button>
+            <Menu size={24} />
+          </button>
+        </DesktopActionGroup>
         <Logo />
+        <SubscribeWrapper>
+          <Button>Subscribe</Button>
+          <SubscribeLink href="/">Already a subscriber?</SubscribeLink>
+        </SubscribeWrapper>
       </MainHeader>
     </header>
   );
@@ -39,6 +51,10 @@ const SuperHeader = styled.div`
   padding: 16px 0;
   background: var(--color-gray-900);
   color: white;
+  
+  @media ${QUERIES.laptopAndUp} {
+    display: none;
+  } 
 `;
 
 const Row = styled(MaxWidthWrapper)`
@@ -59,12 +75,57 @@ const ActionGroup = styled.div`
   }
 `;
 
+const DesktopActionGroup = styled(ActionGroup)`
+  display: none;
+  
+  @media ${QUERIES.laptopAndUp} {
+    display: flex;
+  }
+`
+
+const SubscribeWrapper = styled.div`
+  display: none;
+  
+  @media ${QUERIES.laptopAndUp} {
+    display: revert;
+    justify-self: end;
+    position: relative;
+  }
+`
+
 const MainHeader = styled(MaxWidthWrapper)`
   display: flex;
   align-items: center;
   justify-content: center;
   margin-top: 32px;
-  margin-bottom: 48px;
+  margin-bottom: 48px;   
+
+
+  @media ${QUERIES.tabletAndUp} {
+    margin-top: 48px;
+    margin-bottom: 72px;
+  }
+
+  @media ${QUERIES.laptopAndUp} {
+    display: grid;
+    align-items: center;
+    justify-content: revert;
+    grid-template-columns: 1fr auto 1fr;
+    margin-top: 16px;
+    margin-bottom: 72px; 
+    
+  }
 `;
+
+const SubscribeLink = styled.a`
+  position: absolute; /* take link out of flow to vertically align logo with subscribe button */
+  width: 100%;
+  margin-top: 8px;
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--color-gray-900);
+  font-style: italic;
+  text-decoration: underline;
+`
 
 export default Header;
