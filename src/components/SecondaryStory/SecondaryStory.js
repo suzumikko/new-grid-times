@@ -7,7 +7,9 @@ const SecondaryStory = ({ id, title, image, location, abstract }) => {
       <Wrapper>
         <Image alt={image.alt} src={image.src} />
         <Heading>{title}</Heading>
+          <AbstractWrapper>
         <Abstract>{abstract}</Abstract>
+          </AbstractWrapper>
       </Wrapper>
     </a>
   );
@@ -40,11 +42,17 @@ const Heading = styled.h2`
   /* Optical alignment */
   margin-top: -2px;
 `;
+const AbstractWrapper = styled.div`
+  grid-area: abstract;
+`;
 
 const Abstract = styled.p`
-  grid-area: abstract;
   font-size: 1rem;
   white-space: pre-wrap;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
 `;
 
 export default SecondaryStory;
